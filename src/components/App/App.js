@@ -12,6 +12,7 @@ import ChangePassword from '../ChangePassword/ChangePassword'
 import EventCreate from '../events/EventCreate'
 import Events from '../events/Events'
 import Event from '../events/Event'
+import EventEdit from '../events/EventEdit'
 
 class App extends Component {
   constructor () {
@@ -66,6 +67,9 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} exact path='/events/:id' render={() => (
             <Event alert={this.alert} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/events/:id/edit' render={() => (
+            <EventEdit alert={this.alert} user={user} />
           )} />
         </main>
       </Fragment>

@@ -3,7 +3,7 @@ import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig.js'
-import EventForm from './EventForm.js'
+import EventForm from '../shared/EventForm.js'
 
 class EventEdit extends Component {
   constructor () {
@@ -25,16 +25,16 @@ class EventEdit extends Component {
       .catch(console.error)
   }
 
-  handleChange = event => {
-    const updatedField = { [event.target.name]: event.target.value }
+  handleChange = e => {
+    const updatedField = { [e.target.name]: e.target.value }
 
     const eventEdit = Object.assign(this.state.event, updatedField)
 
     this.setState({ event: eventEdit })
   }
 
-  handleSubmit = event => {
-    event.preventDefault()
+  handleSubmit = e => {
+    e.preventDefault()
 
     axios({
       url: `${apiUrl}/events/${this.props.match.params.id}`,
@@ -62,12 +62,8 @@ class EventEdit extends Component {
 
     return (
       <Fragment>
-        <h1>Update Event</h1>
         <EventForm
-          event_name={event.name}
-          location={event.location}
-          date={event.date}
-          info={event.info}
+          event={event}
           handleSubmit={handleSubmit}
           handleChange={handleChange}
           cancelPath={'/events'}

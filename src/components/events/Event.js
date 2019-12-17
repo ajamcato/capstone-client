@@ -25,7 +25,7 @@ const Event = props => {
     })
       .then(() => {
         props.alert({ heading: 'Success', message: 'Event deleted', variant: 'success' })
-        props.history.push('/')
+        props.history.push('/events')
       })
       .catch(() => {
         props.alert({ heading: 'Whopsy!', message: 'Enable to delete', variant: 'danger' })
@@ -46,13 +46,13 @@ const Event = props => {
         <h3 className="h3">{event.date}</h3>
         {event.info
           ? <p>{event.info}</p>
-          : <p className="text-muted">No information to show</p>
+          : <p className="text-muted">No content to show</p>
         }
 
         {userId === event.owner && (
           <Fragment>
-            <Link to={`/events/${props.match.params.id}/edit`}> <Button variant="primary" className="mr-2">Update</Button></Link>
-            <Button onClick={handleDelete} variant="danger" className="mr-2">Delete</Button>
+            <Link to={`/events/${props.match.params.id}/edit`}><Button variant="primary" className="mr-2">Update</Button></Link>
+            <Button href="#/events" onClick={handleDelete} variant="danger" className="mr-2">Delete</Button>
           </Fragment>
         )}
         <Button href="#/events" variant="secondary">Back</Button>
