@@ -41,7 +41,7 @@ const Event = props => {
   return (
     <div className="row">
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
-        <h2>{event.name}</h2>
+        <h2>{event.event_name}</h2>
         <h3 className="h5">{event.location}</h3>
         <h3 className="h3">{event.date}</h3>
         {event.info
