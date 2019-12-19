@@ -1,76 +1,55 @@
-import React, { Component, Fragment } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Redirect, withRouter } from 'react-router-dom'
 import axios from 'axios'
 
 import apiUrl from '../../apiConfig.js'
 import EventForm from '../shared/EventForm.js'
 
-class EventEdit extends Component {
-  constructor () {
-    super()
+const EventEdit = (props) => {
+  const [event, setEvent] = useState({ date: '', event_name: '', info: '', location: '' })
+  const [updated, setUpdated] = useState(false)
 
-    this.state = {
-      event: null
-    }
-  }
-
-  componentDidMount () {
-    axios({
-      url: `${apiUrl}/events/${this.props.match.params.id}`,
-      headers: {
-        'Authorization': `Token token=${this.props.user.token}`
-      }
-    })
-      .then(res => this.setState({ event: res.data.event }))
+  useEffect(() => {
+    axios(`${apiUrl}/events/${props.match.params.id}`)
+      .then(res => setEvent(res.data.event))
       .catch(console.error)
+  }, [])
+
+  const handleChange = e => {
+    e.persist()
+    setEvent(event => ({ ...event, [e.target.name]: e.target.value }))
   }
 
-  handleChange = e => {
-    const updatedField = { [e.target.name]: e.target.value }
-
-    const eventEdit = Object.assign(this.state.event, updatedField)
-
-    this.setState({ event: eventEdit })
-  }
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault()
 
     axios({
-      url: `${apiUrl}/events/${this.props.match.params.id}`,
+      url: `${apiUrl}/events/${props.match.params.id}`,
       method: 'PATCH',
       headers: {
-        'Authorization': `Token token=${this.props.user.token}`
+        'Authorization': `Bearer ${props.user.token}`
       },
-      data: { event: this.state.event }
+      data: { event }
     })
-      .then((response) => this.setState({ updated: true }))
-      .catch(console.error)
+      .then(response => {
+        props.alert({ heading: 'Success', message: 'You edited a event', variant: 'success' })
+      })
+      .then(() => setUpdated(true))
+      .catch(() => props.alert({ heading: 'Nah...', message: 'That didn\'t work', variant: 'danger' }))
   }
 
-  render () {
-    const { updated, event } = this.state
-    const { handleChange, handleSubmit } = this
-
-    if (!event) {
-      return <p>Loading...</p>
-    }
-
-    if (updated) {
-      return <Redirect to={'/events/'} />
-    }
-
-    return (
-      <Fragment>
-        <EventForm
-          event={event}
-          handleSubmit={handleSubmit}
-          handleChange={handleChange}
-          cancelPath={'/events'}
-        />
-      </Fragment>
-    )
+  if (updated) {
+    return <Redirect to={`/events/${props.match.params.id}`} />
   }
+
+  return (
+    <EventForm
+      event={event}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      cancelPath={`#events/${props.match.params.id}`}
+    />
+  )
 }
 
 export default withRouter(EventEdit)

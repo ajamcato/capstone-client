@@ -8,15 +8,12 @@ const EventCreate = (props) => {
   const [event, setEvent] = useState({ event_name: '', location: '', date: '', info: '' })
 
   const handleChange = e => {
-    console.log('e.target.name is', e.target.name)
-    console.log('e.target.value is', e.target.value)
     e.persist()
     setEvent(event => ({ ...event, [e.target.name]: e.target.value }))
   }
 
   const handleSubmit = e => {
     e.preventDefault()
-    console.log('event is', event)
 
     axios({
       url: `${apiUrl}/events`,
@@ -34,7 +31,7 @@ const EventCreate = (props) => {
   }
 
   return (
-    <EventForm event={event} handleChange={handleChange} handleSubmit={handleSubmit} cancelPath='/events' />
+    <EventForm event={event} handleChange={handleChange} handleSubmit={handleSubmit} cancelPath='#/events' />
   )
 }
 

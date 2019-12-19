@@ -11,6 +11,7 @@ const Events = props => {
   useEffect(() => {
     axios(`${apiUrl}/events`)
       .then(response => {
+        console.log('Movie Response: ', response)
         console.log(response.data.events.reverse())
         setEvents(response.data.events.reverse())
       })
@@ -24,7 +25,7 @@ const Events = props => {
       action
       href={`#events/${event._id}`}
     >
-      {event.location} : {event.name}
+      {event.event_name}
     </ListGroup.Item>
   ))
 
@@ -33,7 +34,6 @@ const Events = props => {
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
         <div className="d-flex justify-content-between align-items-center">
           <h1>Viewing all Events</h1>
-          {/* ({props.user && <Link to="/create-post">Add a post</Link>}) */}
         </div>
         <ListGroup>
           {eventsJsx}

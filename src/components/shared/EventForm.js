@@ -16,6 +16,7 @@ const EventForm = (props) => {
               value={event.date}
               name="date"
               onChange={handleChange}
+              required
             />
           </Form.Group>
           <Form.Group controlId="event name">
@@ -26,6 +27,7 @@ const EventForm = (props) => {
               value={event.event_name}
               name="event_name"
               onChange={handleChange}
+              required
             >
             </Form.Control>
 
@@ -39,6 +41,7 @@ const EventForm = (props) => {
               value={event.info}
               name="info"
               onChange={handleChange}
+              required
             />
 
           </Form.Group>
@@ -51,6 +54,7 @@ const EventForm = (props) => {
               value={event.location}
               name="location"
               onChange={handleChange}
+              required
             />
           </Form.Group>
           <Button type="submit" variant="primary">Submit</Button>

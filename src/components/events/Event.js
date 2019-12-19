@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 const Event = props => {
   const [event, setEvent] = useState(null)
+  // const [deleted, setDeleted] = useSate(false)
   const userId = props.user ? props.user._id : null
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const Event = props => {
       .catch(() => props.alert({ heading: 'That didn\'t work', message: 'Sorry, couldn\'t retrieve the requested event', variant: 'danger' }))
   }, [])
 
-  const handleDelete = event => {
+  const handleDelete = () => {
     axios({
       url: `${apiUrl}/events/${props.match.params.id}`,
       method: 'DELETE',
@@ -35,8 +36,7 @@ const Event = props => {
   if (!event) {
     return <p>Loading events...</p>
   }
-
-  console.log(event)
+  // console.log(event)
 
   return (
     <div className="row">
@@ -52,7 +52,7 @@ const Event = props => {
         {userId === event.owner && (
           <Fragment>
             <Link to={`/events/${props.match.params.id}/edit`}><Button variant="primary" className="mr-2">Update</Button></Link>
-            <Button href="#/events" onClick={handleDelete} variant="danger" className="mr-2">Delete</Button>
+            <Button onClick={handleDelete} variant="danger" className="mr-2">Delete</Button>
           </Fragment>
         )}
         <Button href="#/events" variant="secondary">Back</Button>
