@@ -36,7 +36,6 @@ const Event = props => {
   if (!event) {
     return <p>Loading events...</p>
   }
-  // console.log(event)
 
   return (
     <div className="row">

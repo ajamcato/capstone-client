@@ -11,8 +11,6 @@ const Events = props => {
   useEffect(() => {
     axios(`${apiUrl}/events`)
       .then(response => {
-        console.log('Movie Response: ', response)
-        console.log(response.data.events.reverse())
         setEvents(response.data.events.reverse())
       })
       // .then(() => props.alert({ heading: 'Success', message: 'Viewing all posts', variant: 'success' }))
