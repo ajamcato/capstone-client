@@ -5,7 +5,7 @@ The Event Planner is a front end application built using React where signed in u
 ![image](./event.png)
 
 ## Planning Process
-  My first approach on creating the application consisted of creating the ERD and the Wireframe to have a visualization of the functionalities of the application. From there, I started to work on the API and tested the CRUD actions with curl scripts. While working on the React front end of the application, I started with creating the CRUD actions which would enable the user to create, edit, delete, and view all event(s). Once I finished the CRUD actions, I started creating the event form that would render the functionalities of the app.
+  My first approach on creating the application consisted of creating the ERD and the Wireframe to have a visualization of the functionalities of the application. From there, I started to work on the API and tested the CRUD actions with curl scripts. While working on the React front end of the application, I started with creating the CRUD actions which would enable the user to create, edit, delete, and view all event(s). Once I finished the CRUD actions, I started creating on the event form that would render the functionalities of the app.
 
   ## User Stories
    - As a user, I want to be able to sign-up
